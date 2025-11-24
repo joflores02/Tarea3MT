@@ -31,15 +31,25 @@ class maquinaTuring:
         if n == 1:
             if direccion == "R": self.cabezal1 += 1
             elif direccion == "L": self.cabezal1 -= 1
-            elif direccion == "S": self.cabezal1 == 1
+            elif direccion == "S": pass
         elif n == 2:
             if direccion == "R": self.cabezal2 += 1
             elif direccion == "L": self.cabezal2 -= 1
-            elif direccion == "S": self.cabezal2 == 1
+            elif direccion == "S": pass
         elif n == 3:
             if direccion == "R": self.cabezal3 += 1
             elif direccion == "L": self.cabezal3 -= 1
-            elif direccion == "S": self.cabezal3 == 1
+            elif direccion == "S": pass
+
+
+    def escribir(self, n, simbolo):
+        if n == 1:
+            self.cinta1[self.cabezal1] = simbolo
+        elif n == 2:
+            self.cinta2[self.cabezal2] = simbolo
+        elif n == 3:
+            self.cinta3[self.cabezal3] = simbolo
+        
 
 
     #def transicion(self):
