@@ -21,7 +21,20 @@ class maquinaTuring:
         #el segundo valor se lee después de # y se guarda en la cinta 3
 
     
-    #def leer(self):
+    def leer(self, n):
+        if n == 1:
+            cinta = self.cinta1
+            cabezal = self.cabezal1
+        elif n == 2:
+            cinta = self.cinta2
+            cabezal = self.cabezal2
+        elif n == 3:
+            cinta = self.cinta3
+            cabezal = self.cabezal3
+    #Se debería poder manejar caundo el cabezal está fuera de rango...
+    
+        return cinta[cabezal] #Se retorna el valor que esté en la posición 
+    
         #utilizar el cabezal de cada cinta para leer el simbolo en el que está
         #luego el simbolo indicará el estado que se debe seguir
     
@@ -52,7 +65,10 @@ class maquinaTuring:
         
 
 
-    #def transicion(self):
+    def transicion(self):
+        simbolo1 = self.leer(1)
+        simbolo2 = self.leer(2)
+        simbolo3 = self.leer(3)
     #para ver hacia que estado se debe dirigir luego de leer los valores en la cinta
 
 
