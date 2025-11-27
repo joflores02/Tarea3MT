@@ -12,6 +12,8 @@ class maquinaTuring:
 
         self.estado = estadoInicial
         self.estadoFinal = estadoFinal
+        #nos aseguramos que el estadofinal sea una lista
+        self.estadoFinal = estadoFinal if estadoFinal else []
         self.transiciones = transiciones
         self.operacion = None
 
@@ -19,7 +21,6 @@ class maquinaTuring:
         # Leer primeros 3 digitos que indicarán la operación
         # el primer valor se lee hasta # y se guardan en la cinta 2 
         #el segundo valor se lee después de # y se guarda en la cinta 3
-
     
     def leer(self, n):
         if n == 1:
@@ -31,10 +32,11 @@ class maquinaTuring:
         elif n == 3:
             cinta = self.cinta3
             cabezal = self.cabezal3
-    #Se debería poder manejar caundo el cabezal está fuera de rango...
-    
-        return cinta[cabezal] #Se retorna el valor que esté en la posición 
-    
+    #Manejo de cuando el cabezal está fuera del rango
+        if 0<=cabezal<len(cinta):
+            return cinta[cabezal]   #Se retorna el valor que esté en la posición
+        else:
+            return self.vacio    
         #utilizar el cabezal de cada cinta para leer el simbolo en el que está
         #luego el simbolo indicará el estado que se debe seguir
     
@@ -70,7 +72,21 @@ class maquinaTuring:
         simbolo2 = self.leer(2)
         simbolo3 = self.leer(3)
     #para ver hacia que estado se debe dirigir luego de leer los valores en la cinta
+        clave = (self.estado, simbolo1,simbolo2,simbolo3) #se crea la clave para la búsqueda
+    #buscamos en el diccionadio de transicioes   
+        if clave in self.transiciones:
+            nuevo_estado, e1,e2,e3,m1,m2,m3 = self.transiciones[clave] #se obtiene la nueva configuración
+            self.escribir(1,e1)
+            self.escribir(2,e2)
+            self.escribir(3,e3)
 
+            self.mover_cabezal(1,m1)
+            self.mover_cabezal(2, m2)
+            self.mover_cabezal(3,m3)
+            self.estado=nuevo_estado
+            return True #cuando la transicion es exitosa
+        else:
+            return False # por si no la regla no está definida
 
     def ejecutar(self):
         #procesar entrada para determinar operación y los valores a operar
@@ -82,4 +98,5 @@ class maquinaTuring:
                 break
 
         # retornar el resultado que estará guardado en la cinta1
-        return ''.join(self.cinta1)
+        return ''.join(self.cinta1).replace(self.vacio, "")
+
